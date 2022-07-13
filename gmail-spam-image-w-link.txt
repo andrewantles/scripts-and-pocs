@@ -1,0 +1,1 @@
+<a href=`https://example.com` target=`_blank` data-saferedirecturl=`https://www.google.com/url?q=https://example.com&amp;source=gmail&amp;ust=1610046773120000&amp;usg=AFQjCNF_YxgS9RTEoj5yX8lw03F9dtzRxw`><img src=`https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.SGCizu8whVURttSuFuvyTAHaDF%26pid%3DApi&f=1` height=`250` width=`800`></a>
